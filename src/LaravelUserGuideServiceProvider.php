@@ -8,9 +8,7 @@ class LaravelUserGuideServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../config/user_guide.php' => config_path('user_guide.php'), 'user-guide'
-        ]);
+        $this->offerPublishing();
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
@@ -21,5 +19,12 @@ class LaravelUserGuideServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/../config/user_guide.php', 'user_guide'
         );
+    }
+
+    protected function offerPublishing()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/user_guide.php' => config_path('user_guide.php')
+        ], 'config');
     }
 }
