@@ -1,0 +1,26 @@
+{
+    "name": "hridoy/laravel-user-guide",
+    "description": "User guide for nextive solution",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hridoy\\LaravelUserGuide\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hridoy\\LaravelUserGuide\\LaravelUserGuideServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Hridoy",
+            "email": "yeasirarafat321@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
