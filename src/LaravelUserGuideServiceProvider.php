@@ -10,7 +10,7 @@ class LaravelUserGuideServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/user_guide.php' => config_path('user_guide.php')
-        ], 'config');
+        ], 'user-guide');
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
