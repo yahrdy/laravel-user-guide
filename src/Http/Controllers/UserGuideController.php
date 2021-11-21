@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Storage;
 
 class UserGuideController extends Controller
 {
-    private $checkPermission;
+    private $checkPermission=false;
 
     public function __construct()
     {
-        $this->checkPermission = config('user_guide.user-guide-permissions.enabled');
+//        $this->checkPermission = config('user_guide.user-guide-permissions.enabled');
+        $this->authorizeResource(UserGuide::class);
     }
 
     /**
