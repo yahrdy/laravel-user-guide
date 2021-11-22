@@ -3,7 +3,7 @@
 return [
     'route' => [
         'prefix' => 'api',
-        'guard' => 'auth:sanctum'
+        'guard' => null
     ],
     'photo' => [
         'disk' => 'do',
@@ -23,7 +23,7 @@ return [
         'forceDelete' => 'force delete user guide category'
     ],
     'user-guide-permissions' => [
-        'enabled' => false,
+        'enabled' => true,
         'index' => 'view any user guide',
         'store' => 'create user guide',
         'show' => 'view user guide',
