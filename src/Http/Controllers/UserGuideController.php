@@ -17,7 +17,7 @@ class UserGuideController extends Controller
     public function __construct()
     {
 //        $this->checkPermission = config('user_guide.user-guide-permissions.enabled');
-        $this->authorizeResource(UserGuide::class);
+//        $this->authorizeResource(UserGuide::class);
     }
 
     /**
