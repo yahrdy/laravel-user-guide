@@ -3,16 +3,13 @@
 namespace Hridoy\LaravelUserGuide\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Hridoy\LaravelUserGuide\Http\Requests\UserGuideCategoryRequest;
 use Hridoy\LaravelUserGuide\Http\Requests\UserGuideRequest;
 use Hridoy\LaravelUserGuide\Models\UserGuide;
-use Hridoy\LaravelUserGuide\Models\UserGuideCategory;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Storage;
 
 class UserGuideController extends Controller
 {
-    private $checkPermission=false;
+    private $checkPermission;
 
     public function __construct()
     {
@@ -20,9 +17,9 @@ class UserGuideController extends Controller
     }
 
     /**
-     * @throws AuthorizationException
+     * @throws \Exception
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         $this->verifyAccess(__FUNCTION__);
         $itemsPerPage = request('per_page') ?? 50;
@@ -38,7 +35,7 @@ class UserGuideController extends Controller
     }
 
     /**
-     * @throws AuthorizationException
+     * @throws \Exception
      */
     public function store(UserGuideRequest $request)
     {
@@ -54,7 +51,7 @@ class UserGuideController extends Controller
     }
 
     /**
-     * @throws AuthorizationException
+     * @throws \Exception
      */
     public function show($id)
     {
@@ -64,7 +61,7 @@ class UserGuideController extends Controller
     }
 
     /**
-     * @throws AuthorizationException
+     * @throws \Exception
      */
     public function update(UserGuideRequest $request, $id)
     {
@@ -81,7 +78,7 @@ class UserGuideController extends Controller
     }
 
     /**
-     * @throws AuthorizationException
+     * @throws \Exception
      */
     public function destroy($id)
     {
@@ -92,7 +89,7 @@ class UserGuideController extends Controller
     }
 
     /**
-     * @throws AuthorizationException
+     * @throws \Exception
      */
     public function restore()
     {
@@ -100,7 +97,7 @@ class UserGuideController extends Controller
     }
 
     /**
-     * @throws AuthorizationException
+     * @throws \Exception
      */
     public function forceDelete()
     {
@@ -108,12 +105,14 @@ class UserGuideController extends Controller
     }
 
     /**
-     * @throws AuthorizationException
+     * @throws \Exception
      */
-    private function verifyAccess($methodName)
+    private function verifyAccess($method)
     {
         if ($this->checkPermission) {
-            $this->authorize(config('user_guide.user-guide-permissions.' . $methodName));
+            if (!(auth()->check() && auth()->user()->can(config('user_guide.user-guide-permissions.' . $method)))) {
+                throw new \Exception('This action is unauthorized', 403);
+            }
         }
     }
 }

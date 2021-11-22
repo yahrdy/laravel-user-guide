@@ -23,7 +23,7 @@ return [
         'forceDelete' => 'force delete user guide category'
     ],
     'user-guide-permissions' => [
-        'enabled' => true,
+        'enabled' => false,
         'index' => 'view any user guide',
         'store' => 'create user guide',
         'show' => 'view user guide',
