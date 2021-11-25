@@ -17,7 +17,9 @@ class UserGuideRequest extends FormRequest
             'user_guide_category_id' => 'nullable|integer|exists:user_guide_categories,id',
             'description' => 'nullable|string',
             'photo' => 'nullable|mimes:jpeg,jpg,png|max:10000',
-            'video' => 'nullable|string'
+            'video' => 'nullable|string',
+            'type' => 'nullable|string',
+            'platform' => 'nullable|string|in:web,app'
         ];
         $newRules = array();
 
