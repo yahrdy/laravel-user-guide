@@ -23,6 +23,8 @@ class UserGuideController extends Controller
     {
         $this->verifyAccess(__FUNCTION__);
         $itemsPerPage = request('per_page') ?? 50;
+        $type = request('type');
+        $platform = request('platform');
         $userGuides = UserGuide::query();
         validator(request()->query(), [
             'id' => 'integer|exists:user_guide_categories'
@@ -30,6 +32,12 @@ class UserGuideController extends Controller
         $id = request('id');
         if ($id) {
             $userGuides->where('user_guide_category_id', $id);
+        }
+        if ($type){
+            $userGuides->where('type',$type);
+        }
+        if ($platform){
+            $userGuides->where('platform',$platform);
         }
         return $userGuides->paginate($itemsPerPage);
     }

@@ -20,6 +20,8 @@ class CreateUserGuidesTable extends Migration
             $table->longText('description')->nullable();
             $table->string('photo')->nullable();
             $table->string('video')->nullable();
+            $table->string('type')->nullable();
+            $table->enum('platform',['web','app','desktop','tab'])->nullable();
             $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
